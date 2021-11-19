@@ -1,0 +1,61 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Admin {
+  group: AdminGroup!
+  id: ID!
+  name: String!
+  password: String!
+}
+
+type AdminGroup {
+  id: ID!
+  name: String!
+  permissions: [String!]!
+}
+
+type Channel {
+  country: String!
+  id: String!
+  image_default: String!
+  image_high: String!
+  image_medium: String!
+  subscribers: Float!
+  title: String!
+  view_count: Float!
+}
+
+type Mutation {
+  addVideo(url: String!): Boolean!
+}
+
+type Query {
+  getUsers: [User!]!
+  getVideos: [Video!]!
+}
+
+type User {
+  first_name: String!
+  id: ID!
+  last_name: String!
+}
+
+type Video {
+  channel: Channel!
+  comment_count: Float!
+  dislike_count: Float!
+  id: String!
+  like_count: Float!
+  published_at: String!
+  thumbnails_default: String!
+  thumbnails_high: String!
+  thumbnails_maxres: String!
+  thumbnails_medium: String!
+  thumbnails_standard: String!
+  title: String!
+  view_count: Float!
+}

@@ -1,0 +1,14 @@
+{
+  getVideos {
+    id
+    thumbnails_high
+    published_at
+    title
+    view_count
+    channel {
+      image_default
+      subscribers
+      title
+    }
+  }
+}
