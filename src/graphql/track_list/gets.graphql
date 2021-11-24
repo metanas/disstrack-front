@@ -1,0 +1,7 @@
+{
+  getTrackLists {
+    id
+    title
+    created_at
+  }
+}

@@ -1,0 +1,3 @@
+mutation ($url: String!) {
+  addVideo(url: $url)
+}

@@ -19,23 +19,45 @@ type AdminGroup {
 }
 
 type Channel {
-  country: String!
+  country: String
   id: String!
   image_default: String!
   image_high: String!
   image_medium: String!
-  subscribers: Float!
+  subscribers: Float
   title: String!
-  view_count: Float!
+  view_count: Float
 }
 
 type Mutation {
-  addVideo(url: String!): Boolean!
+  addTrackList(title: String!, visibility: String!): TrackList!
+  addVideo(url: String!): String!
+  addVideoToTrackList(id: String!, video_id: String!): Boolean!
 }
 
 type Query {
+  getTrackList(id: String!): TrackList!
+  getTrackListVideos(id: String!): [TrackListVideos!]!
+  getTrackLists: [TrackList!]!
   getUsers: [User!]!
   getVideos: [Video!]!
+}
+
+type TrackList {
+  created_at: String!
+  id: String!
+  state: String!
+  title: String!
+  track_list_videos: [TrackListVideos!]!
+  user: User!
+  visibility: String!
+}
+
+type TrackListVideos {
+  id: String!
+  position: String!
+  track_list: TrackList!
+  video: Video!
 }
 
 type User {
@@ -57,5 +79,5 @@ type Video {
   thumbnails_medium: String!
   thumbnails_standard: String!
   title: String!
-  view_count: Float!
+  view_count: Float
 }

@@ -3,11 +3,12 @@
     "target": "esnext",
     "module": "esnext",
     // this enables stricter inference for data properties on `this`
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "moduleResolution": "node",
     "types": [
-      "vite-plugin-vue-gql/client"
+      "vite-plugin-vue-gql/client",
+      "src/types/index.d.ts"
     ]
   }
 }

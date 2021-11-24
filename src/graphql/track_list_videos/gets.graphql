@@ -1,0 +1,18 @@
+query track_list_videos ($id: String!) {
+  getTrackListVideos(id: $id) {
+    id
+    position
+    video {
+      thumbnails_high
+      title
+      published_at
+      view_count
+      id
+      channel {
+        title
+        subscribers
+        image_default
+      }
+    }
+  }
+}

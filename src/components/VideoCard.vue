@@ -18,15 +18,16 @@
 
 <script lang="ts" setup>
 import toNumberCase from "../filters/toNumberCase";
-import {computed} from "vue";
+import { computed } from "vue";
 
 const props = defineProps<{
-  video: Record<string, string>,
-  direction: string
-}>()
+  video: Record<string, string>;
+  direction: string;
+}>();
 
-const published_at = computed(() => new Date(parseInt(props.video.published_at)))
-
+const published_at = computed(
+  () => new Date(parseInt(props.video.published_at))
+);
 </script>
 
 <style lang="scss" scoped>
@@ -35,8 +36,9 @@ const published_at = computed(() => new Date(parseInt(props.video.published_at))
   height: 106px;
   max-width: 460px;
   min-width: 460px;
-  background: #FFFFFF;
-  box-shadow: 0 0 1px 0 rgba(10,31,68,0.08), 0 8px 10px 0 rgba(10,31,68,0.10);
+  background: #ffffff;
+  box-shadow: 0 0 1px 0 rgba(10, 31, 68, 0.08),
+    0 8px 10px 0 rgba(10, 31, 68, 0.1);
   border-radius: 4px;
 
   &[dir="rtl"] {
@@ -65,8 +67,6 @@ const published_at = computed(() => new Date(parseInt(props.video.published_at))
         unicode-bidi: plaintext;
       }
     }
-
-
 
     .channel-information {
       img {

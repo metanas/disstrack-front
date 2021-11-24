@@ -1,0 +1,7 @@
+mutation ($title: String!, $visibility: String!) {
+  addTrackList(title: $title, visibility: $visibility) {
+    id
+    title
+    created_at
+  }
+}

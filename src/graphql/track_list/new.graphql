@@ -1,0 +1,3 @@
+mutation ($id: String!, $video_id: String!) {
+  addVideoToTrackList(id: $id, video_id: $video_id)
+}
