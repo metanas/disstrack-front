@@ -1,9 +1,12 @@
 import {
   ApolloClient,
+  ApolloLink,
   createHttpLink,
+  from,
   InMemoryCache,
 } from "@apollo/client/core";
-import { createApolloProvider } from "@vue/apollo-option";
+import { asyncMap } from "@apollo/client/utilities";
+import { createUploadLink } from "apollo-upload-client";
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
@@ -14,8 +17,34 @@ const httpLink = createHttpLink({
 // Cache implementation
 const cache = new InMemoryCache();
 
+const authMiddleware = new ApolloLink((operation, forward) => {
+  operation.setContext(({ headers = {} }) => ({
+    headers: {
+      ...headers,
+      authorization: localStorage.getItem("token") || null,
+    },
+  }));
+
+  return asyncMap(forward(operation), async (response) => {
+    const { response: res } = operation.getContext();
+    if (res) {
+      const token = res.headers.get("AUTHORIZATION");
+
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+    }
+    return response;
+  });
+});
+
+const apolloUpload = createUploadLink({
+  uri: "/graphql",
+  credentials: "include",
+});
+
 // Create the apollo client
 export const apolloClient = new ApolloClient({
-  link: httpLink,
+  link: from([authMiddleware, httpLink, apolloUpload]),
   cache,
 });

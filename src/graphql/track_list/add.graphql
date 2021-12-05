@@ -1,5 +1,5 @@
-mutation ($title: String!, $visibility: String!) {
-  addTrackList(title: $title, visibility: $visibility) {
+mutation ($title: String!, $visibility: String!, $file: Upload!) {
+  addTrackList(title: $title, visibility: $visibility, file: $file ) {
     id
     title
     created_at

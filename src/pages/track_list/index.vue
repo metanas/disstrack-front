@@ -85,6 +85,7 @@ async function newItem() {
   await newVideoTrackList({
     id: track_list.value.id,
     video_id,
+    position: position.value,
   });
   url.value = "";
   display.value = false;

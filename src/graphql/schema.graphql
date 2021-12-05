@@ -18,6 +18,10 @@ type AdminGroup {
   permissions: [String!]!
 }
 
+type Category {
+  id: Float!
+}
+
 type Channel {
   country: String
   id: String!
@@ -29,10 +33,15 @@ type Channel {
   view_count: Float
 }
 
+type Contributor {
+  track_list: TrackList!
+  user: User!
+}
+
 type Mutation {
-  addTrackList(title: String!, visibility: String!): TrackList!
+  addTrackList(file: Upload!, title: String!, visibility: String!): TrackList!
   addVideo(url: String!): String!
-  addVideoToTrackList(id: String!, video_id: String!): Boolean!
+  addVideoToTrackList(id: String!, position: String!, video_id: String!): Boolean!
 }
 
 type Query {
@@ -44,12 +53,15 @@ type Query {
 }
 
 type TrackList {
+  category: Category!
+  contributors: [Contributor!]!
+  cover: String!
   created_at: String!
   id: String!
+  owner: User!
   state: String!
   title: String!
   track_list_videos: [TrackListVideos!]!
-  user: User!
   visibility: String!
 }
 
@@ -81,3 +93,7 @@ type Video {
   title: String!
   view_count: Float
 }
+
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
