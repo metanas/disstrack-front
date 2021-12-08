@@ -1,6 +1,6 @@
 <template lang="pug">
 Sidebar
-.wrapper
+.wrapper.h-full
   router-view
 </template>
 

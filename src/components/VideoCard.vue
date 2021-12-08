@@ -1,5 +1,5 @@
 <template lang="pug">
-.video-card(:dir="direction")
+.video-card
   .video-cover
     picture
       img(:src="video.thumbnails_high")
@@ -12,8 +12,6 @@
       .channel-name
         .truncate {{ video.channel.title }}
         .subscribers(v-if="video.channel.subscribers") {{ toNumberCase(video.channel.subscribers) }} Subscribers
-  .video-upload-at {{ published_at.toLocaleDateString("fr-FR") }}
-    .video-upload-time {{ published_at.toLocaleTimeString("fr-FR") }}
 </template>
 
 <script lang="ts" setup>
@@ -22,12 +20,7 @@ import { computed } from "vue";
 
 const props = defineProps<{
   video: Record<string, string>;
-  direction: string;
 }>();
-
-const published_at = computed(
-  () => new Date(parseInt(props.video.published_at))
-);
 </script>
 
 <style lang="scss" scoped>

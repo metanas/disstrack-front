@@ -2,9 +2,11 @@
 router-link.w-full.mb-4.px-2(class='sm:w-1/2 md:w-1/3' :to="`/track_list/${item.id}`")
   .relative.bg-white.rounded.border
     picture.block.bg-gray-200.border-b
-      img.block(src='https://via.placeholder.com/800x600/EDF2F7/E2E8F0/&text=Card' alt='Card 1')
+      img.block(:src='item.cover' alt='Card 1')
     .content-track-list
-      font-awesome-icon(:icon="faMap") Public
+      .flex.items-center
+        font-awesome-icon(:icon="faGlobe")
+        .ml-2.uppercase {{ item.visibility }}
       h3.text-2xl.font-bold.mt-4.flex-grow
         a.stretched-link(:title='item.title') {{ item.title }}
       .flex.items-center
@@ -15,7 +17,7 @@ router-link.w-full.mb-4.px-2(class='sm:w-1/2 md:w-1/3' :to="`/track_list/${item.
 </template>
 
 <script lang="ts" setup>
-import { faMap } from "@fortawesome/free-regular-svg-icons/faMap";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons/faGlobe";
 import Avatar from "./Avatar.vue";
 
 const props = defineProps<{

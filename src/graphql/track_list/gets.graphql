@@ -2,6 +2,8 @@
   getTrackLists {
     id
     title
+    cover
+    visibility
     created_at
   }
 }

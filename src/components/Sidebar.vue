@@ -1,7 +1,8 @@
 <template lang="pug">
 #sidebar
   .container.mx-auto.h-full.flex.items-center.justify-between
-    img(src="../assets/logo.svg")
+    router-link(to="/")
+      img(src="../assets/logo.svg")
     nav.flex.items-center
       .mr-4 Categories
       .mr-4 Community

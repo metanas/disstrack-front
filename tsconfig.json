@@ -4,6 +4,8 @@
     "module": "esnext",
     // this enables stricter inference for data properties on `this`
     "strict": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "moduleResolution": "node",
     "types": [

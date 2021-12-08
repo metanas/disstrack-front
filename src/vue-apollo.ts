@@ -1,18 +1,12 @@
 import {
   ApolloClient,
   ApolloLink,
-  createHttpLink,
   from,
   InMemoryCache,
 } from "@apollo/client/core";
 import { asyncMap } from "@apollo/client/utilities";
 import { createUploadLink } from "apollo-upload-client";
-
-// HTTP connection to the API
-const httpLink = createHttpLink({
-  // You should use an absolute URL here
-  uri: "http://localhost:4000/graphql",
-});
+import { store } from "./store";
 
 // Cache implementation
 const cache = new InMemoryCache();
@@ -21,7 +15,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      authorization: localStorage.getItem("token") || null,
+      authorization: store.getters.token || null,
     },
   }));
 
@@ -31,20 +25,20 @@ const authMiddleware = new ApolloLink((operation, forward) => {
       const token = res.headers.get("AUTHORIZATION");
 
       if (token) {
-        localStorage.setItem("token", token);
+        store.commit("setToken", token);
       }
     }
     return response;
   });
 });
 
-const apolloUpload = createUploadLink({
-  uri: "/graphql",
+const httpUpload: ApolloLink = createUploadLink({
+  uri: "http://localhost:4000/graphql",
   credentials: "include",
-});
+}) as unknown as ApolloLink;
 
 // Create the apollo client
 export const apolloClient = new ApolloClient({
-  link: from([authMiddleware, httpLink, apolloUpload]),
+  link: from([authMiddleware, httpUpload]),
   cache,
 });

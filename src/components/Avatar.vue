@@ -1,7 +1,7 @@
 <template lang="pug">
 svg( :viewBox="`0 0 ${SIZE} ${SIZE}`" fill="none" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size")
   mask( id="mask__beam" maskUnits="userSpaceOnUse" :x="0" :y="0" :width="SIZE" :height="SIZE")
-    rect( :width="SIZE" :height="SIZE" :rx="square ?  undefined : SIZE * 2" fill="white")
+    rect( :width="SIZE" :height="SIZE" :rx="SIZE * 2" fill="white")
   g( mask="url(#mask__beam)")
     rect( :width="SIZE" :height="SIZE" :fill="item.backgroundColor" )
     rect(x="0" y="0" :width="SIZE" :height="SIZE" :transform="`translate(${item.wrapperTranslateX} ${item.wrapperTranslateY}) rotate(${item.wrapperRotate} ${SIZE / 2} ${SIZE / 2}) scale(${item.wrapperScale})`" :fill="item.wrapperColor" :rx="item.isCircle ? SIZE : SIZE / 6")
@@ -25,7 +25,6 @@ const SIZE = 36;
 
 const props = defineProps<{
   size: number;
-  square: boolean;
   name: string;
 }>();
 

@@ -30,6 +30,7 @@ type Channel {
   image_medium: String!
   subscribers: Float
   title: String!
+  videos: [Video!]!
   view_count: Float
 }
 
@@ -42,9 +43,12 @@ type Mutation {
   addTrackList(file: Upload!, title: String!, visibility: String!): TrackList!
   addVideo(url: String!): String!
   addVideoToTrackList(id: String!, position: String!, video_id: String!): Boolean!
+  login(auth: LoginInput!): Boolean!
+  register(email: String!, first_name: String!, last_name: String!, password: String!): Boolean!
 }
 
 type Query {
+  getTrackInformation(id: String!): TrackListAbout!
   getTrackList(id: String!): TrackList!
   getTrackListVideos(id: String!): [TrackListVideos!]!
   getTrackLists: [TrackList!]!
@@ -62,7 +66,14 @@ type TrackList {
   state: String!
   title: String!
   track_list_videos: [TrackListVideos!]!
+  updated_at: String!
   visibility: String!
+}
+
+type TrackListAbout {
+  channels: [Channel!]!
+  channels_count: Float!
+  videos_count: Float!
 }
 
 type TrackListVideos {
@@ -73,6 +84,7 @@ type TrackListVideos {
 }
 
 type User {
+  email: String!
   first_name: String!
   id: ID!
   last_name: String!
@@ -91,9 +103,14 @@ type Video {
   thumbnails_medium: String!
   thumbnails_standard: String!
   title: String!
+  track_list_videos: [TrackListVideos!]!
   view_count: Float
 }
 
-
 "The `Upload` scalar type represents a file upload."
 scalar Upload
+
+input LoginInput {
+  email: String!
+  password: String!
+}

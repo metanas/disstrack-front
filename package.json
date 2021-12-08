@@ -15,13 +15,18 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "@vee-validate/i18n": "^4.5.6",
+    "@vee-validate/rules": "^4.5.6",
     "@vue/apollo-composable": "^4.0.0-alpha.15",
     "@vue/apollo-option": "^4.0.0-alpha.15",
     "apollo-upload-client": "^16.0.0",
     "graphql": "^16.0.1",
+    "vee-validate": "^4.5.6",
     "graphql-tag": "^2.12.6",
-    "vue": "^3.2.22",
-    "vue-router": "4.0.12"
+    "vue": "^3.2.23",
+    "vue-router": "4.0.12",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-graphql": "^1.1.0",

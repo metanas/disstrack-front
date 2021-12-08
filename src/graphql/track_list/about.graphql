@@ -1,0 +1,11 @@
+query ($id: String!) {
+  getTrackInformation(id: $id) {
+    channels {
+      id
+      image_default
+      title
+    }
+    videos_count
+    channels_count
+  }
+}

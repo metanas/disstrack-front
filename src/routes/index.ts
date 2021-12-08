@@ -6,17 +6,23 @@ export const router = createRouter({
   routes: [
     {
       path: "/",
-      component: () => import("../pages/index.vue"),
+      component: () => import("@/pages/index.vue"),
+      children: [
+        {
+          path: "",
+          component: () => import("@/pages/home.vue"),
+        },
+        {
+          path: "/track_list/:id",
+          props: (route) => route.params,
+          component: () => import("@/pages/track_list/index.vue"),
+        },
+      ],
     },
     {
-      path: "/track_list/:id",
-      props: (route) => route.params,
-      component: () => import("../pages/track_list/index.vue"),
+      path: "/register",
+      component: () => import("@/pages/register.vue"),
     },
-    {
-      path: "/login",
-      component: () => import("../pages/login.vue"),
-    },
-    { path: "/:pathMatch(.*)*", component: import("../pages/not_found.vue") },
+    { path: "/:pathMatch(.*)*", component: import("@/pages/not_found.vue") },
   ], // short for `routes: routes`
 });
