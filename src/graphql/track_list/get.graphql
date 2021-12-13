@@ -2,8 +2,14 @@ query ($id: String!) {
   getTrackList(id: $id) {
     id
     title
-    cover
+    cover_url
     created_at
     updated_at
+    owner {
+      last_name
+      first_name
+      id
+      picture
+    }
   }
 }

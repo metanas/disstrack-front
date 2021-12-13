@@ -5,46 +5,54 @@ schema {
   mutation: Mutation
 }
 
-type Admin {
-  group: AdminGroup!
-  id: ID!
-  name: String!
-  password: String!
-}
-
-type AdminGroup {
-  id: ID!
-  name: String!
-  permissions: [String!]!
-}
-
-type Category {
+type CategoryModel {
+  description: String
   id: Float!
+  name: String!
 }
 
 type Channel {
+  country: String!
+  created_at: String!
+  id: String!
+  image_default: String!
+  image_high: String!
+  image_medium: String!
+  subscribers: Float!
+  title: String!
+  updated_at: String!
+  videos: [VideoModel!]!
+  view_count: Float!
+}
+
+type ChannelModel {
   country: String
+  created_at: String!
   id: String!
   image_default: String!
   image_high: String!
   image_medium: String!
   subscribers: Float
   title: String!
-  videos: [Video!]!
+  updated_at: String!
+  videos: VideoModel!
   view_count: Float
 }
 
-type Contributor {
-  track_list: TrackList!
-  user: User!
+type ContributorModel {
+  id: Float!
+  track_list: TrackListModel!
+  user: UserModel!
 }
 
 type Mutation {
   addTrackList(file: Upload!, title: String!, visibility: String!): TrackList!
   addVideo(url: String!): String!
   addVideoToTrackList(id: String!, position: String!, video_id: String!): Boolean!
-  login(auth: LoginInput!): Boolean!
-  register(email: String!, first_name: String!, last_name: String!, password: String!): Boolean!
+  login(auth: LoginInput!): User!
+  register(email: String!, first_name: String!, last_name: String!, password: String!): User!
+  signInWithFacebook(token: String!): User!
+  signInWithGoogle(token: String!): User!
 }
 
 type Query {
@@ -57,15 +65,15 @@ type Query {
 }
 
 type TrackList {
-  category: Category!
-  contributors: [Contributor!]!
-  cover: String!
+  category: CategoryModel!
+  contributors: [ContributorModel!]!
+  cover_url: String!
   created_at: String!
   id: String!
-  owner: User!
+  owner: UserModel!
   state: String!
   title: String!
-  track_list_videos: [TrackListVideos!]!
+  track_list_videos: [TrackListVideosModel!]!
   updated_at: String!
   visibility: String!
 }
@@ -76,23 +84,58 @@ type TrackListAbout {
   videos_count: Float!
 }
 
+type TrackListModel {
+  category: CategoryModel!
+  contributors: [ContributorModel!]!
+  cover_url: String!
+  created_at: String!
+  id: String!
+  owner: UserModel!
+  state: String!
+  title: String!
+  track_list_videos: [TrackListVideosModel!]!
+  updated_at: String!
+  visibility: String!
+}
+
 type TrackListVideos {
   id: String!
   position: String!
-  track_list: TrackList!
-  video: Video!
+  track_list: TrackListModel!
+  video: VideoModel!
+}
+
+type TrackListVideosModel {
+  id: String!
+  position: String!
+  track_list: TrackListModel!
+  video: VideoModel!
 }
 
 type User {
+  account_type: String!
+  email: String!
+  first_name: String!
+  id: String!
+  last_name: String!
+  picture: String
+  verified_email: Boolean!
+}
+
+type UserModel {
+  account_type: String!
   email: String!
   first_name: String!
   id: ID!
   last_name: String!
+  picture: String
+  verified_email: Boolean!
 }
 
 type Video {
-  channel: Channel!
+  channel: ChannelModel!
   comment_count: Float!
+  created_at: String!
   dislike_count: Float!
   id: String!
   like_count: Float!
@@ -103,7 +146,27 @@ type Video {
   thumbnails_medium: String!
   thumbnails_standard: String!
   title: String!
-  track_list_videos: [TrackListVideos!]!
+  track_list_videos: [TrackListVideosModel!]!
+  updated_at: String!
+  view_count: Float!
+}
+
+type VideoModel {
+  channel: ChannelModel!
+  comment_count: Float!
+  created_at: String!
+  dislike_count: Float!
+  id: String!
+  like_count: Float!
+  published_at: String!
+  thumbnails_default: String!
+  thumbnails_high: String!
+  thumbnails_maxres: String!
+  thumbnails_medium: String!
+  thumbnails_standard: String!
+  title: String!
+  track_list_videos: [TrackListVideosModel!]!
+  updated_at: String!
   view_count: Float
 }
 

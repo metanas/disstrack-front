@@ -2,8 +2,14 @@
   getTrackLists {
     id
     title
-    cover
+    cover_url
     visibility
     created_at
+    owner {
+      id
+      picture
+      first_name
+      last_name
+    }
   }
 }

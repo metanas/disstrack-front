@@ -46,7 +46,7 @@
             | Upload
   .flex.justify-between.mt-4.items-center
     h1.text-lg Featured Timelines
-    button.btn.bg-purple-800.text-white(@click="display = true") New Track list
+    button.btn.bg-purple-800.text-white(@click="display = true" v-if="store.getters.isAuth") New Track list
   .flex.flex-row.flex-wrap.-mx-2.mt-6
     track-list-card(v-for="item in items" :key="item.id" :item="item")
 </template>
@@ -58,10 +58,12 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import ADD_TRACK_LIST from "../graphql/track_list/add.graphql";
 import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
 import TrackListCard from "../components/TrackListCard.vue";
+import { useStore } from "vuex";
 
 const faTimesCp = computed(() => faTimes);
 
 const display = ref(false);
+const store = useStore();
 
 const item = ref<{
   title: string;

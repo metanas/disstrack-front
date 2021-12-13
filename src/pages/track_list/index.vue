@@ -1,6 +1,6 @@
 <template lang="pug">
-.cover-image
-  img(:src="track_list.cover")
+.cover-image(v-if="!loading")
+  img(:src="`${BASE_URL}/images/${track_list.cover_url}`")
   .shadow
     .container.mx-auto
       h1.text-6xl.font-bold.text-center {{ track_list.title }}
@@ -51,8 +51,9 @@
       section.information
         .title Creator
         .flex.mt-2.items-center
-          Avatar(name="owner" :size="40")
-          .ml-2 Owner
+          img.avatar-img(:src="track_list.owner.picture" v-if="track_list.owner.picture")
+          Avatar(name="track_list.owner.id" :size="40" v-else)
+          .ml-2 {{ track_list.owner.first_name }} {{ track_list.owner.last_name }}
       section.information
         .title Contributors
         .flex.flex-wrap
@@ -70,7 +71,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
 import VideoCard from "../../components/VideoCard.vue";
 import TimeLine from "../../components/TimeLine.vue";
@@ -82,6 +83,8 @@ import ADD_VIDEO from "../../graphql/videos/add.graphql";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../../components/Avatar.vue";
+
+const BASE_URL = computed(() => import.meta.env.VITE_BASE_URL);
 
 const props = defineProps<{
   id: string;
@@ -103,7 +106,7 @@ const { result: result_about, refetch: refetch_about } = useQuery(
   GET_TRACK_LIST_ABOUT,
   {
     id: props.id,
-  }
+  },
 );
 
 const {
@@ -171,6 +174,14 @@ section.information {
     font-size: 12px;
     line-height: 150%;
     color: #18181b;
+  }
+
+  .avatar-img {
+    border-radius: 50%;
+    border: 1px solid #868e96;
+    object-fit: scale-down;
+    width: 40px;
+    height: 40px;
   }
 
   .channel-image {

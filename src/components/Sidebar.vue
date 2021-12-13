@@ -6,12 +6,18 @@
     nav.flex.items-center
       .mr-4 Categories
       .mr-4 Community
-      Button.bg-purple-800 Join Now
-
+      router-link(to="/register" v-if="!isAuth")
+        Button.bg-purple-800 Join Now
 </template>
 
 <script lang="ts" setup>
 import Button from "./Button.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
+
+const store = useStore();
+
+const isAuth = computed(() => !!store.getters.token);
 </script>
 <style lang="scss">
 #sidebar {

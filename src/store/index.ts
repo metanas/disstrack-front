@@ -3,10 +3,11 @@ import { InjectionKey } from "vue";
 import createPersistedState from "vuex-persistedstate";
 
 interface State {
-  admin: {
+  user: {
     id: string;
-    username: string;
-    status: string;
+    first_name: string;
+    last_name: string;
+    email: string;
   } | null;
   token: string | null;
 }
@@ -16,13 +17,13 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state() {
     return {
-      admin: null,
+      user: null,
       token: "",
     };
   },
   mutations: {
-    setAdmin(state, payload) {
-      state.admin = payload;
+    setUser(state, payload) {
+      state.user = payload;
     },
     setToken(state, payload) {
       state.token = payload;
@@ -31,12 +32,13 @@ export const store = createStore<State>({
   actions: {
     async logout({ commit }) {
       commit("setToken", null);
-      commit("setAdmin", null);
+      commit("setUser", null);
     },
   },
   getters: {
+    isAuth: (state) => !!state.token,
     token: (state) => state.token,
-    currentUser: (state) => state.admin,
+    currentUser: (state) => state.user,
   },
   plugins: [createPersistedState()],
 });

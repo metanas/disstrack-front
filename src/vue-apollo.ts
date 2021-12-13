@@ -33,7 +33,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const httpUpload: ApolloLink = createUploadLink({
-  uri: "http://localhost:4000/graphql",
+  uri: `${import.meta.env.VITE_BASE_URL}/graphql`,
   credentials: "include",
 }) as unknown as ApolloLink;
 

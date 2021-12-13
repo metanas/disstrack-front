@@ -1,0 +1,11 @@
+mutation ($token: String!){
+  signInWithFacebook(token: $token) {
+    email
+    last_name
+    first_name
+    picture
+    id
+    account_type
+    verified_email
+  }
+}
