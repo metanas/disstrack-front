@@ -2,13 +2,15 @@
 button.btn
   font-awesome-icon.mr-3(:icon="icon" v-if="icon")
   slot
+  font-awesome-icon.ml-3.animate-spin(:icon="faSpinner" v-if="loading")
 </template>
 
 <script lang="ts" setup>
 import type { IconDefinition } from "@fortawesome/free-brands-svg-icons";
-
+import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
 defineProps<{
   icon?: IconDefinition;
+  loading?: Boolean,
 }>();
 </script>
 <style lang="scss">

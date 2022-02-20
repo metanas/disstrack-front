@@ -31,13 +31,12 @@ export async function login(): Promise<FaceBookResponse | null> {
       fields: ["email", "name", "picture"],
     },
   );
-  const facebookResponse: FaceBookResponse = {
+  return {
     name: profile.name,
     email: profile.email,
     picture: profile.picture.data.url,
     authResponse: response.authResponse,
-  };
-  return facebookResponse;
+  } as FaceBookResponse;
 }
 
 export async function logout(): Promise<void> {

@@ -1,7 +1,7 @@
 <template lang="pug">
 .bg-gradient-to-r.from-green-400.to-purple-800.h-full.flex.items-center
   .container.mx-auto.flex.justify-center
-    .card.max-w-2xl.min-w-2xl.py-4.px-8.bg-white.shadow-lg.rounded-lg.my-20(class="w-2/4")
+    .card.py-4.px-8.bg-white.shadow-lg.rounded-lg.my-20(class="xl:w-2/4 lg:w-2/3 w-11/12")
       .flex.justify-center.mb-6
         img(src="../assets/logo.svg")
       form(@submit.prevent="submit")
